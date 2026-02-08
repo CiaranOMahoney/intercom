@@ -1,79 +1,45 @@
 # Intercom Auto-Tag Sentiment Analyzer
 
-**Description:**
 Automatically tags Intercom users as `positive` or `negative` based on sentiment analysis of their first conversation message.
 
 ---
 
-## How it integrates with Intercom
+## Trac Address (for payouts)
 
-- Uses Intercom Webhooks (topic: `conversation.user.created`) to receive new conversation messages.
-- Calls the [Sentiment](https://www.npmjs.com/package/sentiment) library to compute a sentiment score.
-- Applies or creates `positive`/`negative` tags via the Intercom REST API.
+trac1yxj0dk9w8wvjc3pw279xrkaettq5tpyy55f0zqhhhp4psruakf0qeqs007
 
 ---
 
-## Getting Started
+## Proof of Running
 
-### 1. Fork & Clone
+**Service startup (demo mode):**
 
-```bash
-git clone https://github.com/<your-account>/intercom-auto-tag-sentiment-analyzer.git
-cd intercom-auto-tag-sentiment-analyzer
-```
+![Startup proof](./proof/startup.png)
 
-### 2. Install Dependencies
+**Webhook handling (demo token – expected authorization error):**
 
-```bash
-npm install
-```
+![Webhook proof](./proof/webhook.png)
 
-### 3. Configure
+> Note: When `INTERCOM_ACCESS_TOKEN` is not set, the app runs in demo mode.  
+> Webhook requests are received and processed, but Intercom API calls correctly fail with `unauthorized`.
 
-Copy `.env.example` to `.env` or create `.env`:
+---
 
-```bash
-INTERCOM_ACCESS_TOKEN=your_intercom_token
+## How It Works
+
+- Listens for Intercom webhook events: `conversation.user.created`
+- Extracts the first conversation message
+- Analyzes sentiment using the `sentiment` npm package
+- Determines a `positive` or `negative` label
+- Attempts to apply the corresponding tag via the Intercom REST API
+- Runs fully in demo mode without credentials for local verification
+
+---
+
+## Configuration
+
+Environment variables:
+
+```env
+INTERCOM_ACCESS_TOKEN=your_intercom_access_token
 PORT=3000
-```
-
-> **Note:** If `INTERCOM_ACCESS_TOKEN` is not set, the service will start in demo mode using a placeholder token (`demo-token`).
-> API calls will fail until you supply a valid token.
-
-
-### 4. Run the Service
-
-```bash
-npm start
-```
-
-### 5. Test Locally
-
-Use the following `curl` command to simulate a webhook:
-
-```bash
-curl -X POST http://localhost:3000/webhook \
-  -H 'Content-Type: application/json' \
-  -d '{"topic":"conversation.user.created","data":{"item":{"user":{"id":"123"},"conversation_message":{"body":"Great product!"}}}}'
-```
-
----
-
-## Trac Payout Address
-
-`TBD-UNIQUE-TRAC-ADDRESS`
-
----
-
-## Registration
-
-After confirming the app is runnable and tested, register it via a PR or issue in the competition registry with:
-
-- **App Name:** Intercom Auto-Tag Sentiment Analyzer
-- **Repo URL:** https://github.com/<your-account>/intercom-auto-tag-sentiment-analyzer
-- **Short Description:** Auto-tags users based on message sentiment
-- **Trac Address:** `TBD-UNIQUE-TRAC-ADDRESS`
-
----
-
-*Competition deadline: Feb 12*
