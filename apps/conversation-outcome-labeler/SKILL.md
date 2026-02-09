@@ -1,23 +1,30 @@
-# Conversation Outcome Labeler Skill
+Conversation Outcome Labeler
 
-What the app does:
-Applies a human-readable outcome label (Solved, Escalated, Deferred, Rejected, Workaround) based on keywords in the final agent message when a conversation is marked resolved.
+Purpose
+Apply a concrete outcome label when a conversation is marked resolved.
 
-How to run in demo mode:
-```
-npm install
-npm start
-```
+Trigger
+Conversation marked resolved.
 
-Example input:
-```json
-{ "final_agent_message_text": "We will defer this request until next quarter.", "resolution_status": "resolved" }
-```
+Inputs
+Final agent message text, resolution status.
 
-Example output:
-```json
-{ "outcome": "Deferred" }
-```
+Output
+One outcome label:
+Solved / Escalated / Deferred / Rejected / Workaround.
 
-How to verify it is running:
-Check console logs for the input text and computed outcome; the HTTP response returns the outcome JSON.
+Example input
+{
+  "final_agent_message_text": "We will defer this request until next quarter.",
+  "resolution_status": "resolved"
+}
+
+Example output
+{
+  "outcome": "Deferred"
+}
+
+Notes
+Runs in demo mode.
+Deterministic keyword-based logic.
+No credentials required.
