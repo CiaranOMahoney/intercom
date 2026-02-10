@@ -2,6 +2,7 @@ Intercom app submission: Auto-Tag Sentiment Analyzer
 
 Fork: https://github.com/CiaranOMahoney/intercom
 Main repo: https://github.com/Trac-Systems/intercom
+
 Trac address: trac1yxj0dk9w8wvjc3pw279xrkaettq5tpyy55f0zqhhhp4psruakf0qeqs007
 
 Summary  
