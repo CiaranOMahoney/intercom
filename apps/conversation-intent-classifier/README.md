@@ -1,34 +1,58 @@
+name: conversation-intent-classifier
+description: Assigns a deterministic intent label to a conversation based on explicit keyword rules.
+---
+
 # Conversation Intent Classifier
 
-Assigns one intent label to a new conversation using deterministic keyword rules.
+## What This App Does
 
-## Trac Address (for payouts)
+This app assigns a single intent label to a conversation based on explicit keyword matching in the customer’s message.  
+The possible labels are:
 
-trac1lmecylkpa2vdpt87ql5ucwzp6rcatsrx0cjasnuqyyy4qqyezcqqv3lr2z
+Billing  
+Bug  
+Feature  
+Cancellation  
+How-To  
+Other  
 
-## Summary
+The logic is fully deterministic and rule-based. No machine learning or scoring is used.
 
-Labels the customer’s first message with exactly one intent from a fixed set: Billing, Bug, Feature, Cancellation, How-To, Other.
+---
 
-## How it works
+## How to Run (Demo Mode)
 
-Receives a conversation payload in demo mode (no credentials required)  
-Extracts the customer message text  
-Matches against fixed keyword lists (case-insensitive, first match wins)  
-Returns a single label string
+From this app folder:
 
-## Intercom integration
+npm install  
+npm start  
 
-Designed for “conversation created” style inputs (first customer message text)  
-Does not call Intercom APIs in demo mode  
-Produces one label that can be used by downstream routing or tagging systems
+The app will start on port 3000 and run in demo mode.
 
-## Proof
+---
 
-**Server startup**
+## Example Input
 
-![Server startup](./proof/01-server-start-and-log.png)
+POST request to:
 
-**Request response**
+http://localhost:3000/webhook
 
-![Request response](./proof/02-request-response.png)
+With JSON body:
+
+{
+  "message": {
+    "body": "I need help with billing"
+  }
+}
+
+---
+
+## Example Output
+
+Billing
+
+---
+
+## How to Verify
+
+When running in demo mode, the console logs the detected intent and the HTTP response returns the intent label as plain text.
