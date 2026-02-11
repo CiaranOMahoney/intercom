@@ -1,7 +1,3 @@
-name: conversation-intent-classifier
-description: Assigns a deterministic intent label to a conversation based on explicit keyword rules.
----
-
 # Conversation Intent Classifier
 
 ## What This App Does
